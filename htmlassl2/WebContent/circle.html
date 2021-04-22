@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Assignment1_HTML_L2</title>	
+</head>
+
+<body>
+ <div id="circle" ondrop="drop(event)" ondragover="allow(event)" >
+	<svg width="500" height="200">
+  		<circle id="c1" cx="70" cy="70" r="60" stroke="black" fill="green" stroke-width="4"  style="opacity: 1;" />	
+
+  		<circle id="c2" cx="300" cy="70" r="60" stroke="black"  fill="yellow" stroke-width="4"  style="opacity: 1;"/>
+  	</svg>
+  </div>
+  
+  <br>
+  
+  <div> <button onclick="getLocation()">Location</button></div>
+
+	<p id="demo"></p>
+ 
+  <image id="p1" src="https://media.giphy.com/media/l3vR16pONsV8cKkWk/giphy.gif" alt="picture" draggable="true" ondragstart="drag(event)" width="50" height="50" style="opacity: 1;">
+
+  <image id="p1" src="https://media.giphy.com/media/l3vR16pONsV8cKkWk/giphy.gif" alt="picture" draggable="true" ondragstart="drag(event)" width="50" height="50" style="opacity: 1;">
+
+	<p id="result"></p>
+
+<script>
+
+	function drag(ev) {
+  			ev.dataTransfer.setData("text", ev.target.id);
+		}
+
+		function allow(ev){
+			ev.preventDefault();
+		}
+
+		function drop(ev) {
+  			ev.preventDefault();
+  			
+  			var data = ev.dataTransfer.getData("text");
+  			var img1=document.getElementById(data),
+  			    imgSrc=img1.getAttribute('src'),
+  			    imgw=img1.getAttribute('width')
+  			    imgh=img1.getAttribute('height'),
+  			    imgX = ev.target.getAttribute('cx');
+  			    console.log(imgX);
+  			    
+        console.log( ev.target.parentElement.innerHTML += '<image xlink:href="' + imgSrc + '" x="' + imgX + '" y="50"  width="' + imgw + 'px" height="' + imgh + 'px"/>');
+         img1.parentNode.removeChild(img1);
+		}
+		
+		
+		var x = document.getElementById("demo");
+
+		function getLocation() {
+			  if (navigator.geolocation) {
+			    navigator.geolocation.getCurrentPosition(showPosition);
+			  } else { 
+			    x.innerHTML = "Geolocation is not supported by this browser.";
+			  }
+			}
+
+			function showPosition(position) {
+			  x.innerHTML = "Latitude: " + position.coords.latitude + 
+			  "<br>Longitude: " + position.coords.longitude;
+			}
+			
+			var y = document.getElementById("result");
+
+			
+			if (typeof(Storage) !== "undefined") {
+				  localStorage.setItem("Location", x.innerHTML);
+				  document.getElementById("result").innerHTML = localStorage.getItem("Location");
+				} else {
+				  document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+				}
+			
+		</script>
+   
+</body>
+</html>

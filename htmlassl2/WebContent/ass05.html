@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+#div1 {
+  width: 350px;
+  height: 70px;
+  padding: 10px;
+  border: 1px solid #aaaaaa;
+}
+#App {
+  text-align: center;
+}
+</style>
+
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<body>
+
+      <script>
+          function allowDrop(ev) {
+              ev.preventDefault();
+          }
+
+          function drag(ev) {
+              ev.dataTransfer.setData("text", ev.target.id);
+          }
+
+          function drop(ev) {
+              ev.preventDefault();
+              var data = ev.dataTransfer.getData("text");
+              ev.target.appendChild(document.getElementById(data));
+          }
+      </script>
+
+      <div id="root"  ondrop="drop(event)" ondragover="allowDrop(event)">
+
+          <svg width="400" height="400">
+              <circle cx="250" cy="250" r="100" stroke="black" stroke-width="4" fill="yellow" />
+          </svg>
+          
+          <div id="root"  ondrop="drop(event)" ondragover="allowDrop(event)">
+          <svg width="400" height="400">
+              <circle cx="250" cy="250" r="100" stroke="black" stroke-width="4" fill="green" />
+          </svg>
+          </div>
+
+      </div>
+      
+      <br>
+      <div>
+      <img id="drag1" src="https://www.w3schools.com/html/img_logo.gif" draggable="true" ondragstart="drag(event)" width="150" height="60">
+	  <img id="drag1" src="https://www.w3schools.com/html/img_logo.gif" draggable="true" ondragstart="drag(event)" width="150" height="60">
+		</div>
+  </body>
+</body>
+</html>
